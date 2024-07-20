@@ -4,12 +4,13 @@ import { firestore } from './firebaseConfig';
 
 const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
 
-export const createPeerConnection = async (isSource: boolean): Promise<RTCPeerConnection> => {
+export const createPeerConnection = async (isSource: boolean, localStreamRef: React.MutableRefObject<MediaStream | null>): Promise<RTCPeerConnection> => {
     const peerConnection = new RTCPeerConnection(configuration);
 
     if (isSource) {
         const stream: MediaStream = await mediaDevices.getUserMedia({ video: true });
         stream.getTracks().forEach((track) => peerConnection.addTrack(track, stream));
+        localStreamRef.current = stream;
     }
 
     peerConnection.addEventListener('icecandidate', (event) => {
@@ -31,4 +32,10 @@ export const addICECandidates = (peerConnection: RTCPeerConnection): void => {
             }
         });
     });
+};
+
+export const releaseMediaTracks = (stream: MediaStream | null) => {
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
 };

@@ -1,4 +1,4 @@
-package com.wazeemkhan.CCTVGuard
+package com.wazeemkhan.cctvguard
 
 import android.app.Application
 import android.content.res.Configuration

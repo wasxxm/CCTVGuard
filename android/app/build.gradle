@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.wazeem.cctvguard"
+    namespace "com.wazeemkhan.cctvguard"
     defaultConfig {
-        applicationId 'com.wazeem.CCTVGuard'
+        applicationId 'com.wazeemkhan.CCTVGuard'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

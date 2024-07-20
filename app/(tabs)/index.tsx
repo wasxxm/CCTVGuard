@@ -5,43 +5,52 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import {useEffect, useRef, useState} from "react";
-
-import { RTCView } from 'react-native-webrtc';
-import { createPeerConnection, addICECandidates } from '@/constants/WebRTC';
-import { createOffer, createAnswer, listenForOffer, listenForAnswer } from '@/constants/signaling';
 import tw from 'twrnc';
+import React from 'react';
+import RoomScreen from "@/app/screens/RoomScreen";
+import CallScreen from "@/app/screens/CallScreen";
+import JoinScreen from "@/app/screens/JoinScreen";
 
 export default function HomeScreen() {
-    const [isSource, setIsSource] = useState(false);
-    const [streamUrl, setStreamUrl] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
-    const peerConnection = useRef<RTCPeerConnection | null>(null);
 
-    useEffect(() => {
-        const init = async () => {
-            try {
-                peerConnection.current = await createPeerConnection(isSource);
-                if (isSource) {
-                    listenForAnswer(peerConnection.current);
-                } else {
-                    listenForOffer(peerConnection.current);
-                    peerConnection.current.addEventListener('track', (event) => {
-                        setStreamUrl(event.streams[0].toURL());
-                    });
-                }
-                addICECandidates(peerConnection.current);
-            } catch (err) {
-                setError('Failed to initialize WebRTC');
-            }
-        };
-        init();
-    }, [isSource]);
-
-    const startCall = async () => {
-        if (isSource) {
-            await createOffer(peerConnection.current!);
-        }
+    const screens = {
+        ROOM: "JOIN_ROOM",
+        CALL: "CALL",
+        JOIN: "JOIN",
     };
+
+    const [screen, setScreen] = useState(screens.ROOM);
+    const [roomId, setRoomId] = useState("");
+
+    let content;
+
+    switch (screen) {
+        case screens.ROOM:
+            content = (
+                <RoomScreen
+                    roomId={roomId}
+                    setRoomId={setRoomId}
+                    screens={screens}
+                    setScreen={setScreen}
+                />
+            );
+            break;
+
+        case screens.CALL:
+            content = (
+                <CallScreen roomId={roomId} screens={screens} setScreen={setScreen} />
+            );
+            break;
+
+        case screens.JOIN:
+            content = (
+                <JoinScreen roomId={roomId} screens={screens} setScreen={setScreen} />
+            );
+            break;
+
+        default:
+            content = <ThemedText>Wrong Screen</ThemedText>;
+    }
 
 
     return (
@@ -57,14 +66,8 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
-        <View style={tw`flex-1 justify-center items-center bg-gray-100`}>
-            <View style={tw`flex-row`}>
-                <Button title="Switch to Source" onPress={() => setIsSource(true)} />
-                <Button title="Switch to Viewer" onPress={() => setIsSource(false)} />
-            </View>
-            <Button title="Start Call" onPress={startCall} />
-            {streamUrl && <RTCView streamURL={streamUrl} style={tw`w-full h-full`} />}
-            {error && <Text style={tw`text-red-500`}>{error}</Text>}
+        <View style={tw`h-100 w-80 justify-center items-center bg-gray-100`}>
+            {content}
         </View>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>

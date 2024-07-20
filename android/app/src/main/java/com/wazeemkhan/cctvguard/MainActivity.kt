@@ -1,4 +1,4 @@
-package com.wazeemkhan.CCTVGuard
+package com.wazeemkhan.cctvguard
 
 import android.os.Build
 import android.os.Bundle
