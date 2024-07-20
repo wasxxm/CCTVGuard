@@ -1,12 +1,50 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import {Image, StyleSheet, Platform, View, Button} from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import {useEffect, useRef, useState} from "react";
+
+import { RTCView } from 'react-native-webrtc';
+import { createPeerConnection, addICECandidates } from '@/constants/WebRTC';
+import { createOffer, createAnswer, listenForOffer, listenForAnswer } from '@/constants/signaling';
+import tw from 'twrnc';
 
 export default function HomeScreen() {
-  return (
+    const [isSource, setIsSource] = useState(false);
+    const [streamUrl, setStreamUrl] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const peerConnection = useRef<RTCPeerConnection | null>(null);
+
+    useEffect(() => {
+        const init = async () => {
+            try {
+                peerConnection.current = await createPeerConnection(isSource);
+                if (isSource) {
+                    listenForAnswer(peerConnection.current);
+                } else {
+                    listenForOffer(peerConnection.current);
+                    peerConnection.current.addEventListener('track', (event) => {
+                        setStreamUrl(event.streams[0].toURL());
+                    });
+                }
+                addICECandidates(peerConnection.current);
+            } catch (err) {
+                setError('Failed to initialize WebRTC');
+            }
+        };
+        init();
+    }, [isSource]);
+
+    const startCall = async () => {
+        if (isSource) {
+            await createOffer(peerConnection.current!);
+        }
+    };
+
+
+    return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
@@ -19,6 +57,15 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
+        <View style={tw`flex-1 justify-center items-center bg-gray-100`}>
+            <View style={tw`flex-row`}>
+                <Button title="Switch to Source" onPress={() => setIsSource(true)} />
+                <Button title="Switch to Viewer" onPress={() => setIsSource(false)} />
+            </View>
+            <Button title="Start Call" onPress={startCall} />
+            {streamUrl && <RTCView streamURL={streamUrl} style={tw`w-full h-full`} />}
+            {error && <Text style={tw`text-red-500`}>{error}</Text>}
+        </View>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
@@ -67,4 +114,8 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
+    video: {
+        width: '100%',
+        height: '100%',
+    },
 });
