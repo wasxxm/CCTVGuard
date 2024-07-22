@@ -8,7 +8,7 @@ import {
     RTCSessionDescription,
     MediaStream,
 } from "react-native-webrtc";
-import { db } from "@/constants/firebaseConfig";
+import { db } from "@/config/firebaseConfig";
 import {
     addDoc,
     collection,
@@ -21,6 +21,7 @@ import {
 import CallActionBox from "@/components/CallActionBox";
 import tw from "twrnc";
 import { releaseMediaTracks } from "@/constants/WebRTC";
+import { DeviceInfo } from "@/types/shared";
 
 const configuration = {
     iceServers: [
@@ -38,8 +39,8 @@ interface CallScreenProps {
 }
 
 export default function CallScreen({ roomId, screens, setScreen }: CallScreenProps) {
-    const [localStream, setLocalStream] = useState<MediaStream | null>(null);
-    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+    const [localStream, setLocalStream] = useState<MediaStream | undefined>(undefined);
+    const [remoteStream, setRemoteStream] = useState<MediaStream | undefined>(undefined);
     const [cachedLocalPC, setCachedLocalPC] = useState<RTCPeerConnection | null>(null);
     const [isMuted, setIsMuted] = useState<boolean>(false);
     const [isOffCam, setIsOffCam] = useState<boolean>(false);
@@ -65,11 +66,11 @@ export default function CallScreen({ roomId, screens, setScreen }: CallScreenPro
 
     const startLocalStream = async () => {
         const isFront = true;
-        const devices = await mediaDevices.enumerateDevices();
+        const devices = await mediaDevices.enumerateDevices() as DeviceInfo[];
 
         const facing = isFront ? "front" : "environment";
         const videoSourceId = devices.find(
-            (device) => device.kind === "videoinput" && device.facing === facing
+            (device: { kind: string; facing: string; }) => device.kind === "videoinput" && device.facing === facing
         );
         const facingMode = isFront ? "user" : "environment";
         const constraints = {
@@ -90,9 +91,14 @@ export default function CallScreen({ roomId, screens, setScreen }: CallScreenPro
 
     const startCall = async (id: string) => {
         const localPC = new RTCPeerConnection(configuration);
-        localStream?.getTracks().forEach((track) => {
-            localPC.addTrack(track, localStream);
-        });
+
+        if (localStream && localStream.getTracks().length > 0) {
+            localStream.getTracks().forEach((track) => {
+                localPC.addTrack(track, localStream);
+            });
+        } else {
+            console.log('localStream is not initialized or contains no tracks');
+        }
 
         const roomRef = doc(db, "room", id);
         const callerCandidatesCollection = collection(roomRef, "callerCandidates");
@@ -106,15 +112,18 @@ export default function CallScreen({ roomId, screens, setScreen }: CallScreenPro
             addDoc(callerCandidatesCollection, e.candidate.toJSON());
         });
 
-        localPC.ontrack = (e) => {
-            const newStream = new MediaStream();
-            e.streams[0].getTracks().forEach((track) => {
-                newStream.addTrack(track);
-            });
-            setRemoteStream(newStream);
-        };
+        localPC.addEventListener("track", (e) => {
+            if (e.streams && e.streams[0]) {
+                const newStream = new MediaStream();
+                e.streams[0].getTracks().forEach((track) => {
+                    newStream.addTrack(track);
+                });
+                setRemoteStream(newStream);
+            }
+        });
 
-        const offer = await localPC.createOffer();
+        const offerOptions = {}; // Define offer options if needed
+        const offer = await localPC.createOffer(offerOptions);
         await localPC.setLocalDescription(offer);
 
         await setDoc(roomRef, { offer, connected: false }, { merge: true });
@@ -124,8 +133,8 @@ export default function CallScreen({ roomId, screens, setScreen }: CallScreenPro
             if (!localPC.currentRemoteDescription && data?.answer) {
                 const rtcSessionDescription = new RTCSessionDescription(data.answer);
                 localPC.setRemoteDescription(rtcSessionDescription);
-            } else {
-                setRemoteStream(null);
+            } else if (!data?.answer) {
+                setRemoteStream(undefined);
             }
         });
 
@@ -145,21 +154,21 @@ export default function CallScreen({ roomId, screens, setScreen }: CallScreenPro
     };
 
     const switchCamera = () => {
-        localStream?.getVideoTracks().forEach((track) => track._switchCamera());
+        localStream?.getVideoTracks().forEach((track: { _switchCamera: () => any; }) => track._switchCamera());
     };
 
     const toggleMute = () => {
         if (!remoteStream) {
             return;
         }
-        localStream?.getAudioTracks().forEach((track) => {
+        localStream?.getAudioTracks().forEach((track: { enabled: boolean; }) => {
             track.enabled = !track.enabled;
             setIsMuted(!track.enabled);
         });
     };
 
     const toggleCamera = () => {
-        localStream?.getVideoTracks().forEach((track) => {
+        localStream?.getVideoTracks().forEach((track: { enabled: boolean; }) => {
             track.enabled = !track.enabled;
             setIsOffCam(!isOffCam);
         });
@@ -182,8 +191,8 @@ export default function CallScreen({ roomId, screens, setScreen }: CallScreenPro
         await updateDoc(roomRef, { answer: deleteField() });
 
         releaseMediaTracks(localStream);
-        setLocalStream(null);
-        setRemoteStream(null);
+        setLocalStream(undefined);
+        setRemoteStream(undefined);
         setCachedLocalPC(null);
         setScreen(screens.ROOM);
     };

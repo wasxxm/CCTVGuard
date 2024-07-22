@@ -9,7 +9,7 @@ import {
     MediaStream,
     MediaStreamTrack,
 } from "react-native-webrtc";
-import { db } from "@/constants/firebaseConfig";
+import { db } from "@/config/firebaseConfig";
 import {
     addDoc,
     collection,
@@ -22,6 +22,7 @@ import {
 import CallActionBox from "@/components/CallActionBox";
 import tw from "twrnc";
 import { releaseMediaTracks } from "@/constants/WebRTC";
+import { DeviceInfo } from "@/types/shared";
 
 const configuration = {
     iceServers: [
@@ -32,9 +33,15 @@ const configuration = {
     iceCandidatePoolSize: 10,
 };
 
-export default function JoinScreen({ roomId, screens, setScreen }) {
-    const [localStream, setLocalStream] = useState<MediaStream | null>(null);
-    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+interface JoinScreenProps {
+    roomId: string;
+    screens: any;
+    setScreen: any;
+}
+
+export default function JoinScreen({ roomId, screens, setScreen}: JoinScreenProps) {
+    const [localStream, setLocalStream] = useState<MediaStream | undefined>(undefined);
+    const [remoteStream, setRemoteStream] = useState<MediaStream | undefined>(undefined);
     const [cachedLocalPC, setCachedLocalPC] = useState<RTCPeerConnection | null>(null);
 
     const [isMuted, setIsMuted] = useState(false);
@@ -58,7 +65,7 @@ export default function JoinScreen({ roomId, screens, setScreen }) {
 
     const startLocalStream = async () => {
         const isFront = true;
-        const devices = await mediaDevices.enumerateDevices();
+        const devices = await mediaDevices.enumerateDevices() as DeviceInfo[];
 
         const facing = isFront ? "front" : "environment";
         const videoSourceId = devices.find(
@@ -102,21 +109,32 @@ export default function JoinScreen({ roomId, screens, setScreen }) {
             addDoc(calleeCandidatesCollection, e.candidate.toJSON());
         });
 
-        localPC.ontrack = (e) => {
-            const newStream = new MediaStream();
-            e.streams[0].getTracks().forEach((track) => {
-                newStream.addTrack(track);
-            });
-            setRemoteStream(newStream);
-        };
+        localPC.addEventListener("track", (e) => {
+            if (e.streams && e.streams[0]) {
+                const newStream = new MediaStream();
+                e.streams[0].getTracks().forEach((track) => {
+                    newStream.addTrack(track);
+                });
+                setRemoteStream(newStream);
+            }
+        });
 
-        const offer = roomSnapshot.data().offer;
+        // Check if roomSnapshot.data() is defined before accessing its properties
+        const roomData = roomSnapshot.data();
+        if (!roomData) {
+            // Handle the case where roomData is undefined
+            console.error("Room data is undefined.");
+            return;
+        }
+
+        const offer = roomData.offer;
+
         await localPC.setRemoteDescription(new RTCSessionDescription(offer));
 
         const answer = await localPC.createAnswer();
         await localPC.setLocalDescription(answer);
 
-        await updateDoc(roomRef, { answer, connected: true }, { merge: true });
+        await updateDoc(roomRef, { answer, connected: true });
 
         const unsubscribeCallerCandidates = onSnapshot(callerCandidatesCollection, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
@@ -129,7 +147,7 @@ export default function JoinScreen({ roomId, screens, setScreen }) {
 
         const unsubscribeRoom = onSnapshot(roomRef, (doc) => {
             const data = doc.data();
-            if (!data.answer) {
+            if (data && !data.answer) {
                 setScreen(screens.ROOM);
             }
         });
@@ -168,8 +186,8 @@ export default function JoinScreen({ roomId, screens, setScreen }) {
         await updateDoc(roomRef, { answer: deleteField(), connected: false });
 
         releaseMediaTracks(localStream);
-        setLocalStream(null);
-        setRemoteStream(null);
+        setLocalStream(undefined);
+        setRemoteStream(undefined);
         setCachedLocalPC(null);
         setScreen(screens.ROOM);
     };

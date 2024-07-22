@@ -5,18 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3af2a517-4d0e-4904-aa30-deebaac26d08" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/screens/CallScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/CallActionBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/ThemedSafeAreaView.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/firebaseConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/collections.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/react-native-webrtc-extensions.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/shared.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/CCTVGuard/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/CCTVGuard/MainApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/MainApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/CallScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/CallScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ThemedView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ThemedView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants/WebRTC.ts" beforeDir="false" afterPath="$PROJECT_DIR$/constants/WebRTC.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/firebaseConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/constants/firebaseConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/firebaseConfig.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eas.json" beforeDir="false" afterPath="$PROJECT_DIR$/eas.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,26 +32,27 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "wasxxm"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;wasxxm&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/wasxxm/CCTVGuard.git",
-    "accountId": "af38e886-5e7f-44f3-b8c0-46011abb665b"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/wasxxm/CCTVGuard.git&quot;,
+    &quot;accountId&quot;: &quot;af38e886-5e7f-44f3-b8c0-46011abb665b&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -59,6 +66,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
@@ -77,7 +85,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="React Native.iOS">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config" />
+    </key>
+  </component>
+  <component name="RunManager" selected="React Native.Android">
     <configuration name="Android" type="ReactNative" factoryName="React Native">
       <working-dir value="$PROJECT_DIR$" />
       <node-interpreter value="project" />
@@ -121,6 +134,7 @@
       <workItem from="1721511032998" duration="489000" />
       <workItem from="1721511609129" duration="42000" />
       <workItem from="1721511678309" duration="2652000" />
+      <workItem from="1721557996093" duration="15520000" />
     </task>
     <servers />
   </component>

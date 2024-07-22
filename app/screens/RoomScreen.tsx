@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 
-import { db } from "@/constants/firebaseConfig";
+import { db } from "@/config/firebaseConfig";
 import {
-    addDoc,
-    collection,
     doc,
-    setDoc,
-    getDoc,
-    updateDoc,
-    onSnapshot,
-    deleteField,
+    getDoc
 } from "firebase/firestore";
 import tw from "twrnc";
 
-export default function RoomScreen({ setScreen, screens, setRoomId, roomId }) {
-    const onCallOrJoin = (screen) => {
+interface RoomScreenProps {
+    setScreen: (screenName: string) => void;
+    screens: { [key: string]: string };
+    setRoomId: (roomId: string) => void;
+    roomId: string;
+}
+
+export default function RoomScreen({ setScreen, screens, setRoomId, roomId }: RoomScreenProps) {
+    const onCallOrJoin = (screen: string) => {
         if (roomId.length > 0) {
             setScreen(screen);
         }

@@ -1,6 +1,6 @@
-// app/constants/WebRTC.ts
 import { mediaDevices, RTCPeerConnection, MediaStream, RTCIceCandidate } from 'react-native-webrtc';
-import { firestore } from './firebaseConfig';
+import { candidatesCollection } from '@/services/collections';
+import { addDoc, onSnapshot } from 'firebase/firestore';
 
 const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
 
@@ -13,10 +13,10 @@ export const createPeerConnection = async (isSource: boolean, localStreamRef: Re
         localStreamRef.current = stream;
     }
 
-    peerConnection.addEventListener('icecandidate', (event) => {
+    peerConnection.addEventListener('icecandidate', async (event) => {
         if (event.candidate) {
             const candidate = event.candidate.toJSON();
-            firestore.collection('candidates').add(candidate);
+            await addDoc(candidatesCollection, { candidate });
         }
     });
 
@@ -24,17 +24,17 @@ export const createPeerConnection = async (isSource: boolean, localStreamRef: Re
 };
 
 export const addICECandidates = (peerConnection: RTCPeerConnection): void => {
-    firestore.collection('candidates').onSnapshot((snapshot: { docChanges: () => any[]; }) => {
+    onSnapshot(candidatesCollection, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
             if (change.type === 'added') {
-                const candidate = new RTCIceCandidate(change.doc.data());
+                const candidate = new RTCIceCandidate(change.doc.data().candidate);
                 peerConnection.addIceCandidate(candidate).catch((error) => console.error('Error adding ICE candidate', error));
             }
         });
     });
 };
 
-export const releaseMediaTracks = (stream: MediaStream | null) => {
+export const releaseMediaTracks = (stream: MediaStream | undefined) => {
     if (stream) {
         stream.getTracks().forEach(track => track.stop());
     }

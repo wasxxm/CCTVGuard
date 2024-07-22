@@ -12,9 +12,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 2
+    },
     "ios": {
       "supportsTablet": true,
-      "bitcode": false
+      "bitcode": false,
+      "bundleIdentifier": "com.wazeemkhan.cctvguard"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +35,7 @@
         "android.permission.WAKE_LOCK",
         "android.permission.BLUETOOTH"
       ],
-      "package": "com.wazeemkhan.CCTVGuard"
+      "package": "com.wazeemkhan.cctvguard"
     },
     "web": {
       "bundler": "metro",
