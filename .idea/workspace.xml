@@ -5,24 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3af2a517-4d0e-4904-aa30-deebaac26d08" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/ThemedSafeAreaView.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/firebaseConfig.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/collections.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/react-native-webrtc-extensions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/shared.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/CCTV-Guard.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/webrtc/WebRTCConnection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/explore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/explore.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/CallScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/CallScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ThemedView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ThemedView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/WebRTC.ts" beforeDir="false" afterPath="$PROJECT_DIR$/constants/WebRTC.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/firebaseConfig.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eas.json" beforeDir="false" afterPath="$PROJECT_DIR$/eas.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/CCTVGuard.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/CCTVGuard.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/shared.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/shared.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,9 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -68,9 +64,10 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Volumes/Software/React-Native/CCTVGuard",
+    "last_opened_file_path": "/Volumes/Software/React-Native/CCTV-Guard",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,7 +78,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.scopes",
-    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/Volumes/Software/React-Native/CCTV-Guard/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -134,7 +131,12 @@
       <workItem from="1721511032998" duration="489000" />
       <workItem from="1721511609129" duration="42000" />
       <workItem from="1721511678309" duration="2652000" />
-      <workItem from="1721557996093" duration="15520000" />
+      <workItem from="1721557996093" duration="15608000" />
+      <workItem from="1721681735217" duration="9000" />
+      <workItem from="1721681780934" duration="69000" />
+      <workItem from="1721681862260" duration="254000" />
+      <workItem from="1721682234466" duration="125000" />
+      <workItem from="1721682406264" duration="4548000" />
     </task>
     <servers />
   </component>

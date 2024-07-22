@@ -1,81 +1,52 @@
-import {Image, StyleSheet, Platform, View, Button, StatusBar} from 'react-native';
-
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import {useEffect, useRef, useState} from "react";
-import tw from 'twrnc';
-import React from 'react';
+import React, { useState } from "react";
+import { StyleSheet, Platform, StatusBar, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import RoomScreen from "@/app/screens/RoomScreen";
 import CallScreen from "@/app/screens/CallScreen";
 import JoinScreen from "@/app/screens/JoinScreen";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ThemedSafeAreaView } from '@/components/ThemedSafeAreaView';
+import { ThemedSafeAreaView } from "@/components/ThemedSafeAreaView";
+import { ThemedView } from "@/components/ThemedView";
+import {ThemedText} from "@/components/ThemedText";
+
+const screens = {
+    ROOM: "JOIN_ROOM",
+    CALL: "CALL",
+    JOIN: "JOIN",
+};
 
 export default function HomeScreen() {
-
-    const screens = {
-        ROOM: "JOIN_ROOM",
-        CALL: "CALL",
-        JOIN: "JOIN",
-    };
-
     const [screen, setScreen] = useState(screens.ROOM);
     const [roomId, setRoomId] = useState("");
 
-    let content;
-
-    switch (screen) {
-        case screens.ROOM:
-            content = (
-                <RoomScreen
-                    roomId={roomId}
-                    setRoomId={setRoomId}
-                    screens={screens}
-                    setScreen={setScreen}
-                />
-            );
-            break;
-
-        case screens.CALL:
-            content = (
-                <CallScreen roomId={roomId} screens={screens} setScreen={setScreen} />
-            );
-            break;
-
-        case screens.JOIN:
-            content = (
-                <JoinScreen roomId={roomId} screens={screens} setScreen={setScreen} />
-            );
-            break;
-
-        default:
-            content = <ThemedText>Wrong Screen</ThemedText>;
-    }
-
     const insets = useSafeAreaInsets();
 
+    const renderScreen = () => {
+        switch (screen) {
+            case screens.ROOM:
+                return <RoomScreen roomId={roomId} setRoomId={setRoomId} screens={screens} setScreen={setScreen} />;
+            case screens.CALL:
+                return <CallScreen roomId={roomId} screens={screens} setScreen={setScreen} />;
+            case screens.JOIN:
+                return <JoinScreen roomId={roomId} screens={screens} setScreen={setScreen} />;
+            default:
+                return <ThemedText>Wrong Screen</ThemedText>;
+        }
+    };
+
     return (
-        <ThemedSafeAreaView style={[styles.safeArea, tw`flex-1`]}>
-            <ThemedView style={[
-                    tw`justify-center items-center bg-gray-100`,
-                    { paddingBottom: insets.bottom, paddingTop: insets.top },
-                ]}>
-                {content}
+        <ThemedSafeAreaView style={[styles.safeArea, { paddingBottom: insets.bottom, paddingTop: insets.top }]}>
+            <ThemedView style={[{ justifyContent: "center", alignItems: "center", backgroundColor: "gray" }]}>
+                {renderScreen()}
             </ThemedView>
         </ThemedSafeAreaView>
-  );
+    );
 }
 
-// Function to determine if additional padding is needed
-const needsExtraPadding = () => {
-    return Platform.OS === 'android' && StatusBar.currentHeight && StatusBar.currentHeight > 24;
-};
-
-// Calculate additional padding if needed
+const needsExtraPadding = () => Platform.OS === 'android' && StatusBar.currentHeight && StatusBar.currentHeight > 24;
 const extraPadding = needsExtraPadding() ? 10 : 0;
 
 const styles = StyleSheet.create({
     safeArea: {
-        paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ? StatusBar.currentHeight : 0) + extraPadding : 0,
+        paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) + extraPadding : 0,
     },
 });

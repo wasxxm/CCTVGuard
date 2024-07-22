@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
-
 import { db } from "@/config/firebaseConfig";
-import {
-    doc,
-    getDoc
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import tw from "twrnc";
 
 interface RoomScreenProps {
-    setScreen: (screenName: string) => void;
-    screens: { [key: string]: string };
+    setScreen: (screen: string) => void;
+    screens: any;
     setRoomId: (roomId: string) => void;
     roomId: string;
 }
 
 export default function RoomScreen({ setScreen, screens, setRoomId, roomId }: RoomScreenProps) {
-    const onCallOrJoin = (screen: string) => {
-        if (roomId.length > 0) {
-            setScreen(screen);
-        }
-    };
-
-    //generate random room id
     useEffect(() => {
         const generateRandomId = () => {
             const characters = "abcdefghijklmnopqrstuvwxyz";
@@ -31,25 +20,19 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }: Ro
                 const randomIndex = Math.floor(Math.random() * characters.length);
                 result += characters.charAt(randomIndex);
             }
-            return setRoomId(result);
+            setRoomId(result);
         };
         generateRandomId();
     }, []);
 
-    //checks if room is existing
     const checkMeeting = async () => {
         if (roomId) {
             const roomRef = doc(db, "room", roomId);
             const roomSnapshot = await getDoc(roomRef);
-
-            // console.log(roomSnapshot.data());
-
-            if (!roomSnapshot.exists() || roomId === "") {
-                // console.log(`Room ${roomId} does not exist.`);
+            if (!roomSnapshot.exists()) {
                 Alert.alert("Wait for your instructor to start the meeting.");
-                return;
             } else {
-                onCallOrJoin(screens.JOIN);
+                setScreen(screens.JOIN);
             }
         } else {
             Alert.alert("Provide a valid Room ID.");
@@ -67,19 +50,15 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }: Ro
             <View style={tw`gap-y-3 mx-5 mt-2`}>
                 <TouchableOpacity
                     style={tw`bg-sky-300 p-2  rounded-md`}
-                    onPress={() => onCallOrJoin(screens.CALL)}
+                    onPress={() => setScreen(screens.CALL)}
                 >
-                    <Text style={tw`text-center text-xl font-bold `}>
-                        Start meeting
-                    </Text>
+                    <Text style={tw`text-center text-xl font-bold `}>Start meeting</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={tw`bg-sky-300 p-2 rounded-md`}
-                    onPress={() => checkMeeting()}
+                    onPress={checkMeeting}
                 >
-                    <Text style={tw`text-center text-xl font-bold `}>
-                        Join meeting
-                    </Text>
+                    <Text style={tw`text-center text-xl font-bold `}>Join meeting</Text>
                 </TouchableOpacity>
             </View>
         </View>
