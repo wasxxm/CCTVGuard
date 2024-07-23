@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {Dimensions, View} from "react-native";
+import { Dimensions, View } from "react-native";
 import {
     RTCPeerConnection,
     RTCView,
@@ -17,13 +17,14 @@ import {
     getDoc,
     updateDoc,
     onSnapshot,
-    deleteField,
+    deleteField, setDoc,
 } from "firebase/firestore";
 import tw from "twrnc";
 import { releaseMediaTracks } from "@/constants/WebRTC";
 import { DeviceInfo as DeviceInfoRTC, RoomData } from "@/types/shared";
 import CallActionBox from "@/components/CallActionBox";
-import {RTCRtpSendParametersInit} from "react-native-webrtc/src/RTCRtpSendParameters";
+import { RTCRtpSendParametersInit } from "react-native-webrtc/src/RTCRtpSendParameters";
+import { ThemedView } from "@/components/ThemedView";
 
 const configuration = {
     iceServers: [
@@ -94,7 +95,12 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
         const roomRef = doc(db, "room", roomId);
         const roomSnapshot = await getDoc(roomRef);
 
-        if (!roomSnapshot.exists()) return;
+        if (!roomSnapshot.exists()) {
+            console.log("Room does not exist. Creating a new room.");
+            await setDoc(roomRef, {}); // Ensure a room document is created if it does not exist
+        } else {
+            console.log("Room exists. Joining the existing room.");
+        }
 
         const pc = new RTCPeerConnection(configuration);
         localStream?.getTracks().forEach(track => pc.addTrack(track, localStream));
@@ -119,7 +125,12 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
         });
 
         setPeerConnection(pc);
-        isCaller ? await createOffer(pc, roomRef) : await answerCall(pc, roomRef);
+
+        if (isCaller) {
+            await createOffer(pc, roomRef);
+        } else {
+            await answerCall(pc, roomRef);
+        }
 
         onSnapshot(roomRef, doc => {
             const data = doc.data() as RoomData;
@@ -137,6 +148,7 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
             });
         });
     };
+
 
     const createOffer = async (pc: RTCPeerConnection, roomRef: any) => {
         const offer = await pc.createOffer({});
@@ -186,6 +198,7 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
 
             const stats = await peerConnection.getStats(track);
             for (const report of stats) {
+                // console.log("Report type:", report);
                 if (report.type === "outbound-rtp" && report.kind === "video") {
                     const currentBitrate = (report.bytesSent * 8) / (report.timestamp / 1000); // Convert to bits per second
 
@@ -254,26 +267,38 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
         setIsOffCam(!track.enabled);
     });
 
+
     const endCall = async () => {
         if (peerConnection) {
             peerConnection.getSenders().forEach(sender => peerConnection.removeTrack(sender));
             peerConnection.close();
             setPeerConnection(null);
         }
-        await updateDoc(doc(db, "room", roomId), { answer: deleteField(), connected: false });
+
+        // Check if the room document exists before attempting to update it
+        const roomRef = doc(db, "room", roomId);
+        const roomSnapshot = await getDoc(roomRef);
+
+        if (roomSnapshot.exists()) {
+            await updateDoc(roomRef, { answer: deleteField(), connected: false });
+        } else {
+            console.warn(`No room document found for roomId: ${roomId}`);
+        }
+
         releaseMediaTracks(localStream);
         setLocalStream(undefined);
         setRemoteStream(undefined);
         setScreen(screens.ROOM);
     };
 
+
     return (
-        <View style={tw`flex-1`}>
-            <RTCView style={tw`flex-1`} streamURL={remoteStream?.toURL()} objectFit="cover" />
-            {!isOffCam && <RTCView style={tw`w-32 h-48 absolute right-6 top-8`} streamURL={localStream?.toURL()} />}
-            <View style={tw`absolute bottom-0 w-full`}>
+        <ThemedView style={tw`w-full`}>
+            <RTCView style={tw`h-64`} streamURL={remoteStream?.toURL()} objectFit="cover" />
+            {!isOffCam && <RTCView style={tw`h-64 top-8`} streamURL={localStream?.toURL()} />}
+            <ThemedView style={tw``}>
                 <CallActionBox switchCamera={switchCamera} toggleMute={toggleMute} toggleCamera={toggleCamera} endCall={endCall} />
-            </View>
-        </View>
+            </ThemedView>
+        </ThemedView>
     );
 }

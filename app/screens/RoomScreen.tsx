@@ -3,6 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { db } from "@/config/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import tw from "twrnc";
+import { ThemedView } from "@/components/ThemedView";
 
 interface RoomScreenProps {
     setScreen: (screen: string) => void;
@@ -40,7 +41,7 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }: Ro
     };
 
     return (
-        <View>
+        <ThemedView>
             <Text style={tw`text-2xl font-bold text-center`}>Enter Room ID:</Text>
             <TextInput
                 style={tw`bg-white border-sky-600 border-2 mx-5 my-3 p-2 rounded-md`}
@@ -61,6 +62,6 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }: Ro
                     <Text style={tw`text-center text-xl font-bold `}>Join meeting</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </ThemedView>
     );
 }

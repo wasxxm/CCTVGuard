@@ -6,7 +6,7 @@ import CallScreen from "@/app/screens/CallScreen";
 import JoinScreen from "@/app/screens/JoinScreen";
 import { ThemedSafeAreaView } from "@/components/ThemedSafeAreaView";
 import { ThemedView } from "@/components/ThemedView";
-import {ThemedText} from "@/components/ThemedText";
+import { ThemedText } from "@/components/ThemedText";
 
 const screens = {
     ROOM: "JOIN_ROOM",
@@ -35,7 +35,7 @@ export default function HomeScreen() {
 
     return (
         <ThemedSafeAreaView style={[styles.safeArea, { paddingBottom: insets.bottom, paddingTop: insets.top }]}>
-            <ThemedView style={[{ justifyContent: "center", alignItems: "center", backgroundColor: "gray" }]}>
+            <ThemedView style={{ justifyContent: "center", alignItems: "center", backgroundColor: "gray" }}>
                 {renderScreen()}
             </ThemedView>
         </ThemedSafeAreaView>
