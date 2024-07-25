@@ -1,6 +1,5 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getFirestore, Firestore, collection, QueryDocumentSnapshot, DocumentData, FirestoreDataConverter } from 'firebase/firestore';
+import firebase from '@react-native-firebase/app';
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,26 +12,57 @@ const firebaseConfig = {
     measurementId: "G-XRYBNE8N2V"
 };
 
+// Initialize Firebase if it hasn't been initialized yet
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig).then(() => {
+        console.log('Firebase initialized');
+    }).catch((error) => {
+        console.error('Error initializing Firebase:', error);
+    });
+}
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// // Firestore data converter
-// const converter = <T>() => ({
-//     toFirestore: (data: Partial<T>): DocumentData => data,
-//     fromFirestore: (snap: QueryDocumentSnapshot): T => snap.data() as T
-// });
+// Get Firestore instance
+const db = firestore();
 
 // Firestore data converter
-const converter = <T extends DocumentData>(): FirestoreDataConverter<T> => ({
-    toFirestore: (data: T): DocumentData => data,
-    fromFirestore: (snap: QueryDocumentSnapshot): T => snap.data() as T
+interface FirestoreDataConverter<T> {
+    toFirestore(data: T): FirebaseFirestoreTypes.DocumentData;
+    fromFirestore(snapshot: FirebaseFirestoreTypes.DocumentSnapshot<FirebaseFirestoreTypes.DocumentData>): T;
+}
+
+const converter = <T>(): FirestoreDataConverter<T> => ({
+    toFirestore: (data: T): FirebaseFirestoreTypes.DocumentData => data as FirebaseFirestoreTypes.DocumentData,
+    fromFirestore: (snap: FirebaseFirestoreTypes.QueryDocumentSnapshot): T => snap.data() as T,
 });
 
 // Typed Firestore collection function
-const createCollection = <T extends DocumentData>(db: Firestore, collectionPath: string) => {
-    return collection(db, collectionPath).withConverter(converter<T>());
+const createCollection = <T>(collectionPath: string) => {
+    const collectionRef = db.collection(collectionPath);
+    return {
+        withConverter: () => {
+            return {
+                add: (data: T) => collectionRef.add(converter<T>().toFirestore(data)),
+                doc: (id: string) => {
+                    const docRef = collectionRef.doc(id);
+                    return {
+                        get: async () => {
+                            const docSnap = await docRef.get();
+                            return docSnap.exists ? converter<T>().fromFirestore(docSnap) : null;
+                        },
+                        set: (data: T) => docRef.set(converter<T>().toFirestore(data)),
+                        update: (data: Partial<T>) => {
+                            const convertedData = Object.keys(data).reduce((acc, key) => {
+                                acc[key] = (data as any)[key];
+                                return acc;
+                            }, {} as FirebaseFirestoreTypes.DocumentData);
+                            return docRef.update(convertedData);
+                        },
+                        delete: () => docRef.delete()
+                    };
+                }
+            };
+        }
+    };
 };
 
 export { db, createCollection };

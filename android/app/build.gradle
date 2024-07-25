@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services'
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
@@ -85,7 +86,7 @@ android {
 
     namespace "com.wazeemkhan.cctvguard"
     defaultConfig {
-        applicationId 'com.wazeemkhan.CCTVGuard'
+        applicationId 'com.wazeemkhan.cctvguard'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

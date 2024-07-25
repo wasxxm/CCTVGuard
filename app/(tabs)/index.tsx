@@ -1,44 +1,59 @@
 import React, { useState } from "react";
-import { StyleSheet, Platform, StatusBar, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import RoomScreen from "@/app/screens/RoomScreen";
-import CallScreen from "@/app/screens/CallScreen";
-import JoinScreen from "@/app/screens/JoinScreen";
+import { StyleSheet, View, Platform, StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import HomeScreen from "../screens/HomeScreen";
+import RoomScreen from "../screens/RoomScreen";
+import CallScreen from "../screens/CallScreen";
+import JoinScreen from "../screens/JoinScreen";
 import { ThemedSafeAreaView } from "@/components/ThemedSafeAreaView";
-import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 
 const screens = {
+    HOME: "HOME",
     ROOM: "JOIN_ROOM",
     CALL: "CALL",
     JOIN: "JOIN",
 };
 
-export default function HomeScreen() {
-    const [screen, setScreen] = useState(screens.ROOM);
+export default function App() {
+    const [screen, setScreen] = useState(screens.HOME);
+    const [previousScreen, setPreviousScreen] = useState<string | null>(null);
     const [roomId, setRoomId] = useState("");
+    const [isCCTV, setIsCCTV] = useState(false);
 
-    const insets = useSafeAreaInsets();
+    const navigateTo = (nextScreen: string) => {
+        setPreviousScreen(screen);
+        setScreen(nextScreen);
+    };
+
+    const goBack = () => {
+        if (previousScreen) {
+            setScreen(previousScreen);
+            setPreviousScreen(null);
+        }
+    };
 
     const renderScreen = () => {
         switch (screen) {
+            case screens.HOME:
+                return <HomeScreen setScreen={navigateTo} setIsCCTV={setIsCCTV} />;
             case screens.ROOM:
-                return <RoomScreen roomId={roomId} setRoomId={setRoomId} screens={screens} setScreen={setScreen} />;
+                return <RoomScreen roomId={roomId} setRoomId={setRoomId} screens={screens} setScreen={navigateTo} goBack={goBack} isCCTV={isCCTV} />;
             case screens.CALL:
-                return <CallScreen roomId={roomId} screens={screens} setScreen={setScreen} />;
+                return <CallScreen roomId={roomId} screens={screens} setScreen={navigateTo} goBack={goBack} />;
             case screens.JOIN:
-                return <JoinScreen roomId={roomId} screens={screens} setScreen={setScreen} />;
+                return <JoinScreen roomId={roomId} screens={screens} setScreen={navigateTo} goBack={goBack} />;
             default:
                 return <ThemedText>Wrong Screen</ThemedText>;
         }
     };
 
     return (
-        <ThemedSafeAreaView style={[styles.safeArea, { paddingBottom: insets.bottom, paddingTop: insets.top }]}>
-            <ThemedView style={{ justifyContent: "center", alignItems: "center", backgroundColor: "gray" }}>
+        <SafeAreaProvider>
+            <ThemedSafeAreaView style={styles.safeArea}>
                 {renderScreen()}
-            </ThemedView>
-        </ThemedSafeAreaView>
+            </ThemedSafeAreaView>
+        </SafeAreaProvider>
     );
 }
 
@@ -47,6 +62,7 @@ const extraPadding = needsExtraPadding() ? 10 : 0;
 
 const styles = StyleSheet.create({
     safeArea: {
+        flex: 1,
         paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) + extraPadding : 0,
     },
 });

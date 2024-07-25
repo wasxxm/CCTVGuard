@@ -1,12 +1,23 @@
 import React from "react";
+import { Button } from "react-native";
 import WebRTCConnection from "@/components/webrtc/WebRTCConnection";
+import { ThemedView } from "@/components/ThemedView";
+import {Call} from "@grpc/grpc-js";
 
 interface CallScreenProps {
     roomId: string;
-    screens: any;
+    screens: { [key: string]: string };
     setScreen: (screen: string) => void;
+    goBack: () => void;
 }
 
-export default function CallScreen({ roomId, screens, setScreen }: CallScreenProps) {
-    return <WebRTCConnection roomId={roomId} screens={screens} setScreen={setScreen} isCaller={true} />;
+const CallScreen = ({ roomId, screens, setScreen, goBack }: CallScreenProps) => {
+    return (
+        <ThemedView>
+            <Button title="Back" onPress={goBack} />
+            <WebRTCConnection roomId={roomId} screens={screens} setScreen={setScreen} isCaller={true} />
+        </ThemedView>
+    );
 }
+
+export default CallScreen;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "513587419431",
+    "project_id": "cctvguard-46c04",
+    "storage_bucket": "cctvguard-46c04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513587419431:android:8771c1cad001f871587102",
+        "android_client_info": {
+          "package_name": "com.wazeemkhan.cctvguard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpQE4lBEAQCTIAfSrNN6gYwALVGEcYckk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
