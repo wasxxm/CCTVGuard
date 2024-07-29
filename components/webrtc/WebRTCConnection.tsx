@@ -18,13 +18,14 @@ import {
     updateDoc,
     onSnapshot,
     deleteField, setDoc,
-} from "firebase/firestore";
+} from '@react-native-firebase/firestore';
 import tw from "twrnc";
 import { releaseMediaTracks } from "@/constants/WebRTC";
 import { DeviceInfo as DeviceInfoRTC, RoomData } from "@/types/shared";
 import CallActionBox from "@/components/CallActionBox";
 import { RTCRtpSendParametersInit } from "react-native-webrtc/src/RTCRtpSendParameters";
 import { ThemedView } from "@/components/ThemedView";
+import Recorder from "@/components/Recoder";
 
 const configuration = {
     iceServers: [
@@ -95,7 +96,7 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
         const roomRef = doc(db, "room", roomId);
         const roomSnapshot = await getDoc(roomRef);
 
-        if (!roomSnapshot.exists()) {
+        if (!roomSnapshot.exists) {
             console.log("Room does not exist. Creating a new room.");
             await setDoc(roomRef, {}); // Ensure a room document is created if it does not exist
         } else {
@@ -279,7 +280,7 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
         const roomRef = doc(db, "room", roomId);
         const roomSnapshot = await getDoc(roomRef);
 
-        if (roomSnapshot.exists()) {
+        if (roomSnapshot.exists) {
             await updateDoc(roomRef, { answer: deleteField(), connected: false });
         } else {
             console.warn(`No room document found for roomId: ${roomId}`);
@@ -294,8 +295,9 @@ export default function WebRTCConnection({ roomId, screens, setScreen, isCaller 
 
     return (
         <ThemedView style={tw`w-full`}>
-            <RTCView style={tw`h-64`} streamURL={remoteStream?.toURL()} objectFit="cover" />
-            {!isOffCam && <RTCView style={tw`h-64 top-8`} streamURL={localStream?.toURL()} />}
+            <RTCView style={tw`h-32`} streamURL={remoteStream?.toURL()} objectFit="cover" />
+            {!isOffCam && <RTCView style={tw`h-32 top-8`} streamURL={localStream?.toURL()} />}
+            <Recorder localStream={localStream} />
             <ThemedView style={tw``}>
                 <CallActionBox switchCamera={switchCamera} toggleMute={toggleMute} toggleCamera={toggleCamera} endCall={endCall} />
             </ThemedView>

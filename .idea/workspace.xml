@@ -5,11 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3af2a517-4d0e-4904-aa30-deebaac26d08" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/RecorderModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/screens/HomeScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Recoder.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-services.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/MainApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/MainApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/+html.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/+html.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/CallScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/CallScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/CallActionBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/CallActionBox.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/webrtc/WebRTCConnection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/webrtc/WebRTCConnection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/firebaseConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/firebaseConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/collections.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/collections.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +73,7 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;CCTV-Screens&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Volumes/Software/React-Native/CCTV-Guard&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -74,6 +91,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/config" />
     </key>
@@ -130,7 +150,9 @@
       <workItem from="1721682406264" duration="4548000" />
       <workItem from="1721727029269" duration="3178000" />
       <workItem from="1721742050444" duration="1039000" />
-      <workItem from="1721753354171" duration="4078000" />
+      <workItem from="1721753354171" duration="9538000" />
+      <workItem from="1721804789258" duration="3810000" />
+      <workItem from="1721907425471" duration="4303000" />
     </task>
     <servers />
   </component>
