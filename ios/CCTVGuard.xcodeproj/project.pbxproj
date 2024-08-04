@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1F8A5CE42C582AAF00447ABC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F8A5CE32C582AAF00447ABC /* GoogleService-Info.plist */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		709248F3313F736E9C0BE059 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E31B6AB3833B0A0EB6D8FA62 /* PrivacyInfo.xcprivacy */; };
 		7F8B6997E3B4C88A5D09B407 /* Pods_CCTVGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F6869ADC5EB688FA728AD2 /* Pods_CCTVGuard.framework */; };
@@ -25,6 +26,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CCTVGuard/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CCTVGuard/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CCTVGuard/main.m; sourceTree = "<group>"; };
+		1F8A5CE32C582AAF00447ABC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34F6869ADC5EB688FA728AD2 /* Pods_CCTVGuard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCTVGuard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-CCTVGuard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCTVGuard.debug.xcconfig"; path = "Target Support Files/Pods-CCTVGuard/Pods-CCTVGuard.debug.xcconfig"; sourceTree = "<group>"; };
 		7438FA55341E42CBA61DE20A /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "CCTVGuard/noop-file.swift"; sourceTree = "<group>"; };
@@ -32,7 +34,7 @@
 		7A4D352CD337FB3A3BF06240 /* Pods-CCTVGuard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCTVGuard.release.xcconfig"; path = "Target Support Files/Pods-CCTVGuard/Pods-CCTVGuard.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = CCTVGuard/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		E31B6AB3833B0A0EB6D8FA62 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = CCTVGuard/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		E31B6AB3833B0A0EB6D8FA62 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = CCTVGuard/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-CCTVGuard/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1F8A5CE32C582AAF00447ABC /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* CCTVGuard */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -203,6 +206,7 @@
 			files = (
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				1F8A5CE42C582AAF00447ABC /* GoogleService-Info.plist in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				709248F3313F736E9C0BE059 /* PrivacyInfo.xcprivacy in Resources */,
 			);
@@ -265,6 +269,7 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal/FirebaseCoreInternal_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/FirebaseFirestore_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestoreInternal/FirebaseFirestoreInternal_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher/GTMSessionFetcher_Core_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities/GoogleUtilities_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC/FBLPromises_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNDeviceInfo/RNDeviceInfoPrivacyInfo.bundle",
@@ -289,6 +294,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseCoreInternal_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFirestore_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFirestoreInternal_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMSessionFetcher_Core_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleUtilities_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FBLPromises_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNDeviceInfoPrivacyInfo.bundle",
@@ -390,7 +396,10 @@
 				);
 				INFOPLIST_FILE = CCTVGuard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -419,7 +428,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CCTVGuard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -500,7 +512,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD = "";
 				LDPLUSPLUS = "";
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -571,7 +586,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD = "";
 				LDPLUSPLUS = "";
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (

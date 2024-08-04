@@ -5,28 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3af2a517-4d0e-4904-aa30-deebaac26d08" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/RecorderModule.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/screens/HomeScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/Recoder.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/VideoRecorderModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/VideoRecorderPackage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/VideoTrackRegistry.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/VideoTrackRegistryModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/VideoTrackRegistryPackage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/WebRTCViewManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/GoogleService-Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/janus-gateway-js.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/mediasoup-client.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/mediasoupClient.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/recordingUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/MainApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/MainApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/RecorderModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/wazeemkhan/cctvguard/recorder/RecorderPackage.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/+html.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/+html.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/CallScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/CallScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/HomeScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/JoinScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/RoomScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Recoder.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/webrtc/WebRTCConnection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/webrtc/WebRTCConnection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/firebaseConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/firebaseConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/CCTVGuard.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/CCTVGuard.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/CCTVGuard/AppDelegate.mm" beforeDir="false" afterPath="$PROJECT_DIR$/ios/CCTVGuard/AppDelegate.mm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/CCTVGuard/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/CCTVGuard/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/collections.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/collections.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/react-native-webrtc-extensions.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/react-native-webrtc-extensions.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +47,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -152,7 +162,21 @@
       <workItem from="1721742050444" duration="1039000" />
       <workItem from="1721753354171" duration="9538000" />
       <workItem from="1721804789258" duration="3810000" />
-      <workItem from="1721907425471" duration="4303000" />
+      <workItem from="1721907425471" duration="5188000" />
+      <workItem from="1721938170839" duration="2044000" />
+      <workItem from="1722009889587" duration="1109000" />
+      <workItem from="1722026577842" duration="2593000" />
+      <workItem from="1722116308769" duration="105000" />
+      <workItem from="1722116430520" duration="2605000" />
+      <workItem from="1722168214967" duration="4983000" />
+      <workItem from="1722178268245" duration="67000" />
+      <workItem from="1722192675400" duration="1619000" />
+      <workItem from="1722204808686" duration="302000" />
+      <workItem from="1722242359180" duration="5345000" />
+      <workItem from="1722282054199" duration="1262000" />
+      <workItem from="1722336652333" duration="7598000" />
+      <workItem from="1722509452546" duration="3347000" />
+      <workItem from="1722797483076" duration="765000" />
     </task>
     <servers />
   </component>

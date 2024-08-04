@@ -10,7 +10,7 @@ interface JoinScreenProps {
     goBack: () => void;
 }
 
-const JoinScreen = ({ roomId, screens, setScreen, goBack } : JoinScreenProps) => {
+const JoinScreen = ({ roomId, screens, setScreen, goBack }: JoinScreenProps) => {
     return (
         <ThemedView>
             <Button title="Back" onPress={goBack} />

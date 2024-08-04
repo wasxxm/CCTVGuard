@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "react-native";
 import WebRTCConnection from "@/components/webrtc/WebRTCConnection";
 import { ThemedView } from "@/components/ThemedView";
-import {Call} from "@grpc/grpc-js";
 
 interface CallScreenProps {
     roomId: string;
